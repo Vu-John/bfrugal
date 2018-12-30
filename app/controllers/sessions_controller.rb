@@ -10,8 +10,8 @@ class SessionsController < Devise::SessionsController
   def respond_with(resource, _opts = {})
     render json: {
       id: resource.id,
-      firstName: 'John',
-      lastName: 'Doe',
+      firstName: resource.first_name,
+      lastName: resource.last_name,
       email: resource.email,
       token: @token
     }
@@ -22,6 +22,8 @@ class SessionsController < Devise::SessionsController
   end
 
   def current_token
+    puts 'LOGOUT TOKEN'
+    puts request.env['warden-jwt_auth.token']
     request.env['warden-jwt_auth.token']
   end
 end
