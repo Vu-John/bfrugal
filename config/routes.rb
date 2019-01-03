@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :items
   devise_for :users,
              path: '',
              path_names: {
@@ -11,4 +12,6 @@ Rails.application.routes.draw do
                registrations: 'registrations'
              }
   resources :users
+  resource :user_items, only: %i[create destroy]
+  get 'my_items', to: 'users#my_items'
 end

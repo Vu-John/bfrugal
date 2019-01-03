@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+  def my_items
+    @user = current_user
+    user_items = current_user.items
+    render json: user_items
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

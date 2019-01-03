@@ -10,14 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_29_082619) do
+ActiveRecord::Schema.define(version: 2018_12_30_184431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "items", force: :cascade do |t|
+    t.text "name"
+    t.text "current_price"
+    t.text "lowest_price"
+    t.text "url"
+    t.text "img_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "jwt_blacklist", force: :cascade do |t|
     t.string "jti", null: false
     t.index ["jti"], name: "index_jwt_blacklist_on_jti"
+  end
+
+  create_table "user_items", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_user_items_on_item_id"
+    t.index ["user_id"], name: "index_user_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,4 +53,6 @@ ActiveRecord::Schema.define(version: 2018_12_29_082619) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "user_items", "items"
+  add_foreign_key "user_items", "users"
 end

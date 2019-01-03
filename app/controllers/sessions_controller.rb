@@ -22,8 +22,6 @@ class SessionsController < Devise::SessionsController
   end
 
   def current_token
-    puts 'LOGOUT TOKEN'
-    puts request.env['warden-jwt_auth.token']
     request.env['warden-jwt_auth.token']
   end
 end

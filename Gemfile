@@ -31,6 +31,7 @@ gem 'active_model_serializers'
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.8'
 gem 'dotenv-rails'
+gem 'nokogiri'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
