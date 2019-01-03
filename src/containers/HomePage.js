@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import { getAll as getAllItems } from "../actions/ItemActions";
 import { _delete, getAll, logout } from "../actions/UserActions";
 
 class HomePage extends Component {
   componentDidMount() {
     this.props.dispatch(getAll());
+    this.props.dispatch(getAllItems());
   }
 
   handleDeleteUser = id => {
@@ -17,7 +19,7 @@ class HomePage extends Component {
   };
 
   render() {
-    const { user, users } = this.props;
+    const { items, user, users } = this.props;
     return (
       <div className="col-md-6 col-md-offset-3">
         <h1>Hi {user.firstName}!</h1>
@@ -49,6 +51,20 @@ class HomePage extends Component {
             ))}
           </ul>
         )}
+        <p>You're Items!!</p>
+        {items.loading && <em>Loading your items...</em>}
+        {items.items && (
+          <ul>
+            {items.items.map((item, index) => (
+              <li key={item.id}>
+                <p>{item.name}</p>
+                <p>{item.currentPrice}</p>
+                <p>{item.lowestPrice}</p>
+                <img src={item.imgUrl} alt="product" />
+              </li>
+            ))}
+          </ul>
+        )}
         <p>
           <button
             className="btn btn-primary"
@@ -63,9 +79,10 @@ class HomePage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { users, authentication } = state;
+  const { authentication, items, users } = state;
   const { user } = authentication;
   return {
+    items,
     user,
     users
   };
