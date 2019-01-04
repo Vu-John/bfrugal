@@ -1,5 +1,15 @@
 import { authHeader, handleResponse } from "../helpers";
 
+const addItem = url => {
+  const requestOptions = {
+    method: "post",
+    headers: { "Content-Type": "application/json", ...authHeader() },
+    body: JSON.stringify({ url })
+  };
+
+  return fetch(`/user_items`, requestOptions).then(handleResponse);
+};
+
 const getItems = () => {
   const requestOptions = {
     method: "get",
@@ -10,5 +20,6 @@ const getItems = () => {
 };
 
 export const itemService = {
+  addItem,
   getItems
 };

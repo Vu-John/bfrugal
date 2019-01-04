@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import AddItem from "../containers/AddItem";
 import ItemContainer from "../containers/ItemContainer";
 import UserContainer from "../containers/UserContainer";
 
@@ -26,6 +27,7 @@ class HomePage extends Component {
           </button>
         </p>
         <UserContainer />
+        <AddItem />
         <ItemContainer />
       </div>
     );
