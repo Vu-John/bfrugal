@@ -5,7 +5,7 @@ import { addItem } from "../actions/ItemActions";
 const AddItem = ({ dispatch }) => {
   let input;
   return (
-    <div>
+    <div className="add-item-container">
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -16,8 +16,20 @@ const AddItem = ({ dispatch }) => {
           input.value = "";
         }}
       >
-        <input ref={node => (input = node)} />
-        <button type="submit">Add Todo</button>
+        <label htmlFor="url">URL</label>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Best Buy URL Product URL..."
+            ref={node => (input = node)}
+          />
+          <span className="input-group-btn">
+            <button className="btn btn-default" type="submit">
+              Add Item
+            </button>
+          </span>
+        </div>
       </form>
     </div>
   );
