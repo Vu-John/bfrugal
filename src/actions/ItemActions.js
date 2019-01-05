@@ -5,9 +5,8 @@ import { itemService } from "../services/ItemServices";
 export const addItem = url => {
   return dispatch => {
     itemService.addItem(url).then(
-      user => {
-        dispatch(success());
-        window.location.reload();
+      item => {
+        dispatch(success(item));
       },
       error => {
         dispatch(failure(error.toString()));
@@ -16,8 +15,8 @@ export const addItem = url => {
     );
   };
 
-  function success(url) {
-    return { type: itemConstants.ADD_SUCCESS, url };
+  function success(item) {
+    return { type: itemConstants.ADD_SUCCESS, item };
   }
   function failure(error) {
     return { type: itemConstants.ADD_FAILURE, error };
@@ -44,5 +43,28 @@ export const getAll = () => {
   }
   function failure(error) {
     return { type: itemConstants.GET_ALL_FAILURE, error };
+  }
+};
+
+export const _delete = id => {
+  return dispatch => {
+    dispatch(request(id));
+
+    itemService
+      .delete(id)
+      .then(
+        item => dispatch(success(id)),
+        error => dispatch(failure(id, error.toString()))
+      );
+  };
+
+  function request(id) {
+    return { type: itemConstants.DELETE_REQUEST, id };
+  }
+  function success(id) {
+    return { type: itemConstants.DELETE_SUCCESS, id };
+  }
+  function failure(id, error) {
+    return { type: itemConstants.DELETE_FAILURE, id, error };
   }
 };

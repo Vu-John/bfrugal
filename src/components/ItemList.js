@@ -2,14 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import Item from "./Item";
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, deleteItem }) => {
   if (items.loading) {
     return <div>Loading your items...</div>;
   } else {
     return (
       <ul className="item-list">
         {items.items.map(item => (
-          <Item key={item.id} {...item} />
+          <Item
+            key={item.id}
+            {...item}
+            deleteItem={() => deleteItem(item.id)}
+          />
         ))}
       </ul>
     );
@@ -29,7 +33,8 @@ ItemList.propTypes = {
         imgUrl: PropTypes.string.isRequired
       }).isRequired
     )
-  })
+  }),
+  deleteItem: PropTypes.func.isRequired
 };
 
 export default ItemList;

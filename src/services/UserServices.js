@@ -1,4 +1,4 @@
-import { authHeader } from "../helpers";
+import { authHeader, handleResponse } from "../helpers";
 
 const login = (email, password) => {
   const requestOptions = {
@@ -65,24 +65,6 @@ const _delete = id => {
   };
 
   return fetch(`/users/${id}`, requestOptions).then(handleResponse);
-};
-
-const handleResponse = response => {
-  return response.text().then(text => {
-    const data = text && JSON.parse(text);
-    if (!response.ok) {
-      // logout if 401 response returned from api
-      if (response.status === 401) {
-        logout();
-        window.location.reload(true);
-      }
-
-      const error = (data && data.message) || response.statusText;
-      return Promise.reject(error);
-    }
-
-    return data;
-  });
 };
 
 export const userService = {

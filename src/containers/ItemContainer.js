@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ItemList from "../components/ItemList";
-import { getAll } from "../actions/ItemActions";
+import { _delete, getAll } from "../actions/ItemActions";
 
 const mapStateToProps = state => ({
   loading: state.loading,
@@ -8,6 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  deleteItem: id => dispatch(_delete(id)),
   getAll: dispatch(getAll())
 });
 

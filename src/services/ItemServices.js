@@ -19,7 +19,17 @@ const getItems = () => {
   return fetch(`/my_items`, requestOptions).then(handleResponse);
 };
 
+const _delete = id => {
+  const requestOptions = {
+    method: "delete",
+    headers: authHeader()
+  };
+
+  return fetch(`/items/${id}`, requestOptions).then(handleResponse);
+};
+
 export const itemService = {
   addItem,
-  getItems
+  getItems,
+  delete: _delete
 };
