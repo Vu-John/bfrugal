@@ -30,6 +30,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'active_model_serializers'
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.8'
+gem 'domainatrix'
 gem 'dotenv-rails'
 gem 'nokogiri'
 
