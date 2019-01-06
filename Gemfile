@@ -40,6 +40,7 @@ group :development, :test do
   gem 'fabrication', '~> 2.20'
   gem 'faker', '~> 1.9.1'
   gem 'json_matchers'
+  gem 'letter_opener'
   gem 'rspec-rails', '~> 3.8'
 end
 

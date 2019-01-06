@@ -25,6 +25,10 @@ module UrlHelper
       logger.debug item.name.to_s
       logger.debug "OLD - current_price: #{item.current_price}, lowest_price: #{item.lowest_price}"
       logger.debug "NEW - current_price: #{price}, lowest_price: #{price}"
+      # Send emails to users
+      item.users.each do |user|
+        UserMailer.price_drop(user, item, price).deliver
+      end
       item.update(current_price: price, lowest_price: price)
     elsif price != item.current_price
       logger.debug item.name.to_s
