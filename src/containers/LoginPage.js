@@ -32,7 +32,7 @@ class LoginPage extends Component {
     const { loggingIn } = this.props;
     const { email, password, submitted } = this.state;
     return (
-      <div className="login-container col-md-6 col-md-offset-3">
+      <div className="login-register-container col-md-6 col-md-offset-3">
         <h2>
           <span>Login</span> <span>{loggingIn && <Loader />}</span>
         </h2>

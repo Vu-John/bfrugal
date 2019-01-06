@@ -21,7 +21,7 @@ const AddItem = ({ dispatch }) => {
           <input
             type="text"
             className="form-control"
-            placeholder="Best Buy Product URL..."
+            placeholder="Best Buy, Canada Computers, Memory Express, or The Source Product URL..."
             ref={node => (input = node)}
           />
           <span className="input-group-btn">

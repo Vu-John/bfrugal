@@ -42,7 +42,7 @@ class RegisterPage extends Component {
     const { registering } = this.props;
     const { user, submitted } = this.state;
     return (
-      <div className="col-md-6 col-md-offset-3">
+      <div className="login-register-container col-md-6 col-md-offset-3">
         <h2>
           <span>Register</span>
           <span>{registering && <Loader />}</span>
