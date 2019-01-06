@@ -1,6 +1,12 @@
 import { userService } from "../services/UserServices";
 
 export const handleResponse = response => {
+  // most likely token expired
+  if (response.status === 401) {
+    userService.logout();
+    window.location.reload(true);
+  }
+
   return response.text().then(text => {
     const data = text && JSON.parse(text);
     if (!response.ok) {
