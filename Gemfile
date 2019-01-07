@@ -32,6 +32,7 @@ gem 'devise'
 gem 'devise-jwt', '~> 0.5.8'
 gem 'domainatrix'
 gem 'dotenv-rails'
+gem 'foreman', '~> 0.82.0'
 gem 'nokogiri'
 
 group :development, :test do

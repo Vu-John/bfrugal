@@ -24,3 +24,6 @@
 
 # ENV Variables
 /.env
+
+# Production -> generated files from rake start:production
+/public

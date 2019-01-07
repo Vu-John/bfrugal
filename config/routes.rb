@@ -15,4 +15,9 @@ Rails.application.routes.draw do
   resources :users
   resource :user_items, only: %i[create]
   get 'my_items', to: 'users#my_items'
+
+  # Pass anything that doesn’t match to index.html so that react-router can take over
+  get '*path', to: "application#fallback_index_html", constraints: ->(request) do
+    !request.xhr? && request.format.html?
+  end
 end
