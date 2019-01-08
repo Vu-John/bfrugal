@@ -2,6 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://bfrugal.herokuapp.com/",
   "proxy": "http://localhost:3001",
   "dependencies": {
     "bootstrap": "^3.4.0",
