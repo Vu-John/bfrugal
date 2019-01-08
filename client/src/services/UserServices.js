@@ -7,7 +7,7 @@ const login = (email, password) => {
     body: JSON.stringify({ user: { email, password } })
   };
 
-  return fetch(`/login`, requestOptions)
+  return fetch(`/sign_in`, requestOptions)
     .then(handleResponse)
     .then(user => {
       if (user.token) {
@@ -25,17 +25,19 @@ const logout = () => {
   };
 
   // remove user from local storage to log user out
-  return fetch(`/logout`, requestOptions).then(localStorage.removeItem("user"));
+  return fetch(`/sign_out`, requestOptions).then(
+    localStorage.removeItem("user")
+  );
 };
 
-const signup = user => {
+const register = user => {
   const requestOptions = {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ user: user })
   };
 
-  return fetch(`/signup`, requestOptions).then(handleResponse);
+  return fetch(`/sign_up`, requestOptions).then(handleResponse);
 };
 
 const getAll = () => {
@@ -70,7 +72,7 @@ const _delete = id => {
 export const userService = {
   login,
   logout,
-  signup,
+  register,
   getAll,
   update,
   delete: _delete

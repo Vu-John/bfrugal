@@ -9,11 +9,19 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    if @user == current_user
+      render json: @user
+    else
+      render json: { error: 'You do not have permission to view this user\'s info' }, status: 400
+    end
   end
 
   def destroy
-    @user.destroy
+    if @user == current_user
+      @user.destroy
+    else
+      render json: { error: 'You do not have permission to delete this user' }, status: 400
+    end
   end
 
   def my_items
