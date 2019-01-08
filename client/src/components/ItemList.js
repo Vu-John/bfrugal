@@ -7,7 +7,7 @@ const ItemList = ({ items, deleteItem }) => {
     return <div>Loading your items...</div>;
   } else {
     return (
-      <ul className="item-list">
+      <div className="item-list container">
         {items.items.map(item => (
           <Item
             key={item.id}
@@ -15,7 +15,7 @@ const ItemList = ({ items, deleteItem }) => {
             deleteItem={() => deleteItem(item.id)}
           />
         ))}
-      </ul>
+      </div>
     );
   }
 };

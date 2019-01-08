@@ -1,8 +1,13 @@
-.item-container {
+.item-container-outter {
+  width: 275px;
+  margin: 0 auto;
+}
+
+.item-container-inner {
   background-color: #ffffff;
   border-radius: 2%;
   padding: 25px;
-  margin-bottom: 50px;
+  margin: 10px;
   width: 250px;
 }
 
@@ -13,4 +18,9 @@
 
 .lowest-price {
   color: red;
+}
+
+.delete-button {
+  display: flex;
+  justify-content: center;
 }
