@@ -11,7 +11,15 @@ const Item = ({
   deleteItem
 }) => (
   <li className="item-container">
-    <img className="product-img" src={imgUrl} alt={name} />
+    {imgUrl !== "" ? (
+      <img className="product-img" src={imgUrl} alt={name} />
+    ) : (
+      <img
+        className="product-img"
+        src="images/no_image_available.png"
+        alt="No Image"
+      />
+    )}
     <h5>
       <a href={url} target="_blank" rel="noopener noreferrer">
         {name}
