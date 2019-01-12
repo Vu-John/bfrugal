@@ -10,7 +10,7 @@ const Item = ({
   imgUrl,
   deleteItem
 }) => (
-  <div className="item-container-outter col-md-2 col-sm-1">
+  <div className="item-container-outter col-md-3 col-sm-1">
     <div className="item-container-inner">
       {imgUrl !== "" ? (
         <img className="product-img" src={imgUrl} alt={name} />
