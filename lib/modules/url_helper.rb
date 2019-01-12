@@ -3,6 +3,10 @@ require 'nokogiri'
 require 'open-uri'
 
 module UrlHelper
+  def dollarToFloat(price)
+    return price[1..-1].to_f
+  end
+
   def check_price(item)
     logger = Logger.new(STDOUT)
 
@@ -17,24 +21,28 @@ module UrlHelper
       price = data.css('.amount').first.text
     when 'canadacomputers'
       price = data.css('.h2-big').first.children[1].children.text
+    when 'memoryexpress'
+      price = data.css('.GrandTotal').children[1].children[2].text.strip
     when 'thesource'
       price = data.css('.price').first.children[0].text.strip + data.css('.price').first.children[1].text.strip
     end
 
-    if price < item.lowest_price
-      logger.debug item.name.to_s
-      logger.debug "OLD - current_price: #{item.current_price}, lowest_price: #{item.lowest_price}"
-      logger.debug "NEW - current_price: #{price}, lowest_price: #{price}"
-      # Send emails to users
-      item.users.each do |user|
-        UserMailer.price_drop(user, item, price).deliver
+    if !price.empty?
+      if dollarToFloat(price) < dollarToFloat(item.lowest_price)
+        logger.debug item.name.to_s
+        logger.debug "OLD - current_price: #{item.current_price}, lowest_price: #{item.lowest_price}"
+        logger.debug "NEW - current_price: #{price}, lowest_price: #{price}"
+        # Send emails to users
+        item.users.each do |user|
+          UserMailer.price_drop(user, item, price).deliver
+        end
+        item.update(current_price: price, lowest_price: price)
+      elsif dollarToFloat(price) != dollarToFloat(item.current_price)
+        logger.debug item.name.to_s
+        logger.debug "OLD - current_price: #{item.current_price}"
+        logger.debug "NEW - current_price: #{price}"
+        item.update(current_price: price)
       end
-      item.update(current_price: price, lowest_price: price)
-    elsif price != item.current_price
-      logger.debug item.name.to_s
-      logger.debug "OLD - current_price: #{item.current_price}"
-      logger.debug "NEW - current_price: #{price}"
-      item.update(current_price: price)
     end
 
     item
